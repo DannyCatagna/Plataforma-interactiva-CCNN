@@ -1,0 +1,6 @@
+{
+  "name": "Exploradores del Mundo Microscópico",
+  "description": "Página web educativa interactiva para 8.º año de EGB sobre el uso del microscopio óptico y visualización de células y tejidos animales y vegetales - Unidad Educativa Guano.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
