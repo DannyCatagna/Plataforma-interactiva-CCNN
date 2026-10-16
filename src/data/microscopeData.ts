@@ -656,3 +656,141 @@ export const TISSUE_CATEGORIES = {
     }
   ]
 };
+
+export const GLOSSARY_TERMS = [
+  {
+    id: 'resolucion',
+    term: 'Resolución (Poder de resolución)',
+    category: 'optica' as const,
+    categoryLabel: 'Óptica y Aumento',
+    definition: 'Capacidad de un sistema óptico para distinguir como separados dos puntos que se encuentran muy próximos entre sí en la muestra.',
+    simpleExplanation: 'No es solo agrandar la imagen, sino verla con nitidez y separar detalles pequeños sin que se vean borrosos.',
+    example: 'El microscopio óptico tiene un límite de resolución de unos 0.2 micrómetros (µm).'
+  },
+  {
+    id: 'tincion',
+    term: 'Tinción o Coloración biológica',
+    category: 'tecnica' as const,
+    categoryLabel: 'Técnicas de Laboratorio',
+    definition: 'Procedimiento técnico que utiliza colorantes químicos afines para teñir estructuras celulares transparentes, aumentando su contraste.',
+    simpleExplanation: 'Pintar las células con tintes especiales para que sus partes invisibles se puedan ver con claridad al microscopio.',
+    example: 'El azul de metileno tiñe de azul intenso los núcleos de las células de la mucosa bucal.'
+  },
+  {
+    id: 'preparacion_fresco',
+    term: 'Preparación en fresco (Montaje húmedo)',
+    category: 'tecnica' as const,
+    categoryLabel: 'Técnicas de Laboratorio',
+    definition: 'Montaje temporal de una muestra viva o recién extraída sobre el portaobjetos con una gota de agua o líquido fisiológico, cubierta por un cubreobjetos.',
+    simpleExplanation: 'Colocar un pedacito de muestra fresca con una gota de agua para observarla de inmediato sin fijadores químicos.',
+    example: 'Una hoja tierna de Elodea con agua destilada para observar el movimiento de los cloroplastos.'
+  },
+  {
+    id: 'preparacion_fija',
+    term: 'Preparación permanente o fija',
+    category: 'tecnica' as const,
+    categoryLabel: 'Técnicas de Laboratorio',
+    definition: 'Lámina tratada mediante fijadores químicos y resinas sintéticas que conserva las células y tejidos intactos durante años para su estudio.',
+    simpleExplanation: 'Muestras preparadas por el docente o el laboratorio que duran mucho tiempo protegidas con resina.',
+    example: 'Cortes histológicos de músculo estriado o médula espinal teñidos con hematoxilina-eosina.'
+  },
+  {
+    id: 'aumento_total',
+    term: 'Aumento total',
+    category: 'optica' as const,
+    categoryLabel: 'Óptica y Aumento',
+    definition: 'Poder de amplificación final que resulta de multiplicar el aumento del lente ocular por el aumento del lente objetivo seleccionado.',
+    simpleExplanation: 'La multiplicación de los dos lentes: Ocular (10x) × Objetivo (40x) = 400x aumentos.',
+    example: 'Con un ocular de 10x y un objetivo de 10x, observamos la muestra 100 veces más grande que su tamaño real.'
+  },
+  {
+    id: 'portaobjetos',
+    term: 'Portaobjetos y Cubreobjetos',
+    category: 'tecnica' as const,
+    categoryLabel: 'Técnicas de Laboratorio',
+    definition: 'Láminas de cristal óptico plano. El portaobjetos es grueso y sirve de base (75 × 25 mm); el cubreobjetos es un cuadrado muy fino (0.17 mm) que aplana la muestra y protege el objetivo.',
+    simpleExplanation: 'El vidrio grande sobre el que va la muestra y el vidrio finito que la cubre para que no se seque ni ensucie el lente.',
+    example: 'Manipularlos siempre por los bordes para no dejar huellas dactilares de grasa.'
+  },
+  {
+    id: 'campo_visual',
+    term: 'Campo visual (Campo óptico)',
+    category: 'optica' as const,
+    categoryLabel: 'Óptica y Aumento',
+    definition: 'Área circular iluminada del espécimen que se percibe a través del ocular al observar la muestra.',
+    simpleExplanation: 'El círculo redondo de luz que ves con tu ojo. A mayor aumento, ves un pedacito más chiquito pero con mayor detalle.',
+    example: 'A 40x el campo mide unos 4.5 mm de diámetro; a 400x se reduce a solo 0.45 mm.'
+  },
+  {
+    id: 'diafragma_iris',
+    term: 'Diafragma iris',
+    category: 'optica' as const,
+    categoryLabel: 'Óptica y Aumento',
+    definition: 'Dispositivo mecánico de láminas metálicas ubicado bajo la platina que gradúa el diámetro del haz de luz que atraviesa la preparación.',
+    simpleExplanation: 'Una ventanita circular que se abre o cierra para controlar cuánta luz entra y mejorar el contraste.',
+    example: 'Para muestras muy transparentes, cerrar un poco el diafragma aumenta el contraste de los bordes.'
+  },
+  {
+    id: 'micrometro',
+    term: 'Micrómetro o Micra (µm)',
+    category: 'optica' as const,
+    categoryLabel: 'Óptica y Aumento',
+    definition: 'Unidad de longitud del Sistema Internacional equivalente a la millonésima parte de un metro o la milésima parte de un milímetro (1 mm = 1000 µm).',
+    simpleExplanation: 'La regla de medir de los biólogos para medir células y bacterias.',
+    example: 'Una célula de epidermis de cebolla mide aproximadamente entre 100 y 300 µm de longitud.'
+  },
+  {
+    id: 'pared_celular',
+    term: 'Pared celular',
+    category: 'celular' as const,
+    categoryLabel: 'Estructuras Celulares',
+    definition: 'Capa externa rígida compuesta principalmente de celulosa que envuelve la membrana plasmática de las células vegetales y les otorga resistencia mecánica.',
+    simpleExplanation: 'El armazón resistente de las plantas que hace que las células parezcan ladrillos y les da firmeza.',
+    example: 'Es la responsable de la forma poligonal ordenada de las células de cebolla.'
+  },
+  {
+    id: 'cloroplasto',
+    term: 'Cloroplasto',
+    category: 'celular' as const,
+    categoryLabel: 'Estructuras Celulares',
+    definition: 'Organelo vegetal membranoso con pigmento verde (clorofila) donde se realiza la fotosíntesis en presencia de luz solar.',
+    simpleExplanation: 'Las fábricas verdes de alimento de las plantas. Solo están en partes que reciben luz (hojas y tallos verdes).',
+    example: 'Las hojas verdes de Elodea tienen abundantes cloroplastos; las cebollas no los tienen porque crecen bajo tierra.'
+  },
+  {
+    id: 'membrana_plasmatica',
+    term: 'Membrana plasmática',
+    category: 'celular' as const,
+    categoryLabel: 'Estructuras Celulares',
+    definition: 'Bicapa lipídica semipermeable que encierra el contenido celular y selecciona activamente las sustancias que entran y salen.',
+    simpleExplanation: 'La piel flexible y protectora de la célula que controla el paso de agua y nutrientes.',
+    example: 'En las células de la mucosa bucal se aprecian pliegues de esta membrana flexible.'
+  },
+  {
+    id: 'nucleo_celular',
+    term: 'Núcleo celular',
+    category: 'celular' as const,
+    categoryLabel: 'Estructuras Celulares',
+    definition: 'Estructura esférica u ovoide delimitada por una doble envoltura con poros que contiene el genoma (ADN) de la célula eucariota.',
+    simpleExplanation: 'El centro de control de la célula donde se guarda la información genética de la vida.',
+    example: 'Se observa como un punto denso y teñido en las células de cebolla y de mucosa humana.'
+  },
+  {
+    id: 'parenquima',
+    term: 'Parénquima',
+    category: 'celular' as const,
+    categoryLabel: 'Estructuras Celulares',
+    definition: 'Tejido vegetal fundamental compuesto por células vivas con paredes primarias delgadas encargado de fotosíntesis, almacenamiento o cicatrización.',
+    simpleExplanation: 'El tejido de relleno y trabajo activo de las plantas, como el mesófilo de las hojas o la pulpa de la manzana.',
+    example: 'El parénquima clorofílico contiene abundantes cloroplastos para captar la luz del sol.'
+  },
+  {
+    id: 'ciclosis',
+    term: 'Ciclosis citoplasmática',
+    category: 'celular' as const,
+    categoryLabel: 'Estructuras Celulares',
+    definition: 'Movimiento rotatorio continuo y activo del citosol generado por filamentos de actina que desplaza organelos dentro de células vegetales vivas.',
+    simpleExplanation: 'Una corriente como un río dentro de la célula que mueve los cloroplastos en círculos para aprovechar mejor la luz.',
+    example: 'En hojas vivas de Elodea se observa a los cloroplastos girando alrededor de la gran vacuola central.'
+  }
+];

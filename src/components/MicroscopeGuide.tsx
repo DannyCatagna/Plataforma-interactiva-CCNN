@@ -84,30 +84,30 @@ export const MicroscopeGuide: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Encabezado y definición científica */}
-      <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-4 shadow-2xs">
+      <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-4 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
           <div>
-            <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+            <div className="text-xs font-semibold text-[#16A6A0] uppercase tracking-wider mb-1">
               Sección 2 · Anatomía del Instrumento
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+            <h2 className="text-2xl font-bold text-[#173B70] tracking-tight">
               Conoce el Microscopio Óptico Compuesto
             </h2>
           </div>
 
-          <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-md shrink-0">
+          <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-lg shrink-0 border border-slate-200">
             <button
               onClick={() => setQuizActive(false)}
-              className={`px-3 py-1.5 text-xs font-semibold rounded transition-colors ${
-                !quizActive ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
+                !quizActive ? 'bg-[#173B70] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Exploración Libre
             </button>
             <button
               onClick={startQuiz}
-              className={`px-3 py-1.5 text-xs font-semibold rounded transition-colors flex items-center gap-1.5 ${
-                quizActive ? 'bg-slate-900 text-white' : 'text-slate-600 hover:text-slate-900'
+              className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${
+                quizActive ? 'bg-[#173B70] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               <HelpCircle className="w-3.5 h-3.5" />
@@ -117,7 +117,7 @@ export const MicroscopeGuide: React.FC = () => {
         </div>
 
         {/* Cita textual requerida */}
-        <p className="text-sm sm:text-base text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-lg border border-slate-200">
+        <p className="text-sm sm:text-base text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-lg border-l-4 border-[#16A6A0]">
           "El microscopio óptico es un instrumento que utiliza lentes y luz para observar objetos
           y estructuras que son demasiado pequeños para distinguirlos a simple vista".
         </p>
@@ -127,45 +127,45 @@ export const MicroscopeGuide: React.FC = () => {
       {!quizActive ? (
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Columna Izquierda: Diagrama Vectorial Científico */}
-          <div className="lg:col-span-7 bg-white border border-slate-200 rounded-xl p-6 shadow-2xs space-y-4">
+          <div className="lg:col-span-7 bg-white border border-slate-200 rounded-xl p-6 shadow-xs space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-              <span className="text-xs font-medium text-slate-500">
+              <span className="text-xs font-medium text-slate-600">
                 Haz clic sobre los números o el listado para revisar la función
               </span>
-              <span className="text-xs font-mono text-slate-400">12 componentes</span>
+              <span className="text-xs font-mono text-[#16A6A0] font-semibold">12 componentes</span>
             </div>
 
-            {/* Filtros de sistemas sin pills */}
+            {/* Filtros de sistemas */}
             <div className="flex flex-wrap items-center gap-1 text-xs">
-              <span className="text-slate-400 mr-2">Sistemas:</span>
+              <span className="text-slate-500 mr-2">Sistemas:</span>
               <button
                 onClick={() => setFilterSystem('all')}
-                className={`px-2.5 py-1 rounded font-medium transition-colors ${
-                  filterSystem === 'all' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+                  filterSystem === 'all' ? 'bg-[#173B70] text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
                 Todos (12)
               </button>
               <button
                 onClick={() => setFilterSystem('optico')}
-                className={`px-2.5 py-1 rounded font-medium transition-colors ${
-                  filterSystem === 'optico' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+                  filterSystem === 'optico' ? 'bg-[#173B70] text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
                 Sistema Óptico (2)
               </button>
               <button
                 onClick={() => setFilterSystem('mecanico')}
-                className={`px-2.5 py-1 rounded font-medium transition-colors ${
-                  filterSystem === 'mecanico' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+                  filterSystem === 'mecanico' ? 'bg-[#173B70] text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
                 Sistema Mecánico (8)
               </button>
               <button
                 onClick={() => setFilterSystem('iluminacion')}
-                className={`px-2.5 py-1 rounded font-medium transition-colors ${
-                  filterSystem === 'iluminacion' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                className={`px-2.5 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+                  filterSystem === 'iluminacion' ? 'bg-[#173B70] text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                 }`}
               >
                 Sistema de Iluminación (2)

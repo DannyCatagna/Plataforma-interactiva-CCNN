@@ -242,11 +242,11 @@ export const MicroscopeSvg: React.FC<MicroscopeSvgProps> = ({
                 <circle
                   cx={cx}
                   cy={cy}
-                  r="20"
+                  r="21"
                   fill="none"
-                  stroke="#0f172a"
-                  strokeWidth="2"
-                  strokeDasharray="3,3"
+                  stroke="#16A6A0"
+                  strokeWidth="2.5"
+                  strokeDasharray="4,3"
                 />
               )}
 
@@ -254,10 +254,10 @@ export const MicroscopeSvg: React.FC<MicroscopeSvgProps> = ({
               <circle
                 cx={cx}
                 cy={cy}
-                r={isSelected ? 14 : isHovered ? 13 : 11}
-                fill={isSelected ? '#0f172a' : isHovered ? '#334155' : '#ffffff'}
-                stroke="#0f172a"
-                strokeWidth={1.5}
+                r={isSelected ? 15 : isHovered ? 13 : 11}
+                fill={isSelected ? '#173B70' : isHovered ? '#16A6A0' : '#ffffff'}
+                stroke={isSelected ? '#173B70' : isHovered ? '#16A6A0' : '#334155'}
+                strokeWidth={1.8}
                 className="transition-all"
               />
 
@@ -266,7 +266,7 @@ export const MicroscopeSvg: React.FC<MicroscopeSvgProps> = ({
                 x={cx}
                 y={cy + 4}
                 textAnchor="middle"
-                fill={isSelected || isHovered ? '#ffffff' : '#0f172a'}
+                fill={isSelected || isHovered ? '#ffffff' : '#173B70'}
                 fontSize={isSelected ? '11' : '10'}
                 fontFamily="sans-serif"
                 fontWeight="bold"

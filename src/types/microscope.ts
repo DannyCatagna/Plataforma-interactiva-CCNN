@@ -68,3 +68,13 @@ export interface QuizQuestion {
   explanation: string;
   topic: 'microscopio' | 'seguridad' | 'celulas' | 'tejidos';
 }
+
+export interface GlossaryTerm {
+  id: string;
+  term: string;
+  category: 'optica' | 'tecnica' | 'celular';
+  categoryLabel: string;
+  definition: string;
+  simpleExplanation: string;
+  example: string;
+}

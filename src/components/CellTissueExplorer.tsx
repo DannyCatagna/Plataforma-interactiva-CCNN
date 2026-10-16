@@ -11,11 +11,11 @@ export const CellTissueExplorer: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Encabezado general */}
-      <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-4 shadow-2xs">
-        <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+      <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-4 shadow-xs">
+        <div className="text-xs font-semibold text-[#16A6A0] uppercase tracking-wider">
           Sección 4 · Biología Celular y Tisular
         </div>
-        <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+        <h2 className="text-2xl font-bold text-[#173B70] tracking-tight">
           Explora las Células y los Tejidos
         </h2>
         <p className="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
@@ -34,9 +34,9 @@ export const CellTissueExplorer: React.FC = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`px-3.5 py-1.5 text-xs font-semibold rounded transition-colors ${
+              className={`px-3.5 py-1.5 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
                 activeTab === tab.id
-                  ? 'bg-slate-900 text-white'
+                  ? 'bg-[#173B70] text-white shadow-xs'
                   : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
               }`}
             >

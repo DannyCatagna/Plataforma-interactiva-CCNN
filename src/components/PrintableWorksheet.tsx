@@ -1,5 +1,6 @@
 import React from 'react';
 import { Microscope } from 'lucide-react';
+import { UnachLogo } from './UnachLogo';
 
 export const PrintableWorksheet: React.FC = () => {
   return (
@@ -11,8 +12,14 @@ export const PrintableWorksheet: React.FC = () => {
         <div>
           {/* ENCABEZADO INSTITUCIONAL OFICIAL */}
           <div className="border-2 border-black p-3 mb-4 text-center">
-            <div className="text-xs uppercase tracking-wider font-sans font-bold text-slate-800">
-              República del Ecuador · Ministerio de Educación
+            <div className="flex items-center justify-between pb-1 border-b border-black mb-1">
+              <UnachLogo size="sm" variant="monochrome" showSubtitle={false} />
+              <div className="text-[10px] uppercase tracking-wider font-sans font-bold text-center">
+                Universidad Nacional de Chimborazo · Dirección de Vinculación con la Sociedad (Riobamba)
+                <br />
+                En articulación con la Unidad Educativa Guano · Ciencias Naturales
+              </div>
+              <div className="w-7 text-right font-sans font-bold text-[10px]">EGB</div>
             </div>
             <h1 className="text-lg font-bold uppercase tracking-tight font-sans mt-0.5">
               Unidad Educativa Guano
@@ -20,7 +27,7 @@ export const PrintableWorksheet: React.FC = () => {
             <div className="text-xs font-semibold uppercase tracking-wide">
               Área de Ciencias Naturales · Año Lectivo 2026 - 2027
             </div>
-            <div className="mt-2 py-1 bg-slate-100 print:bg-transparent border-y border-black font-sans font-bold text-sm tracking-wide">
+            <div className="mt-1.5 py-1 bg-slate-100 print:bg-transparent border-y border-black font-sans font-bold text-sm tracking-wide">
               PRÁCTICA DE LABORATORIO – USO DEL MICROSCOPIO Y OBSERVACIÓN DE CÉLULAS Y TEJIDOS
             </div>
 

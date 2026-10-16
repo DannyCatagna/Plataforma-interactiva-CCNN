@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { SPECIMEN_SLIDES } from '../data/microscopeData';
 import { OcularSpecimenView } from './CellSvg';
-import { Sliders, RotateCcw, Tag, Sun, CheckCircle, Compass, ArrowRight, BookOpen } from 'lucide-react';
+import { Sliders, RotateCcw, Tag, Sun, CheckCircle, Compass, ArrowRight, BookOpen, FileEdit } from 'lucide-react';
 
-export const VirtualLab: React.FC = () => {
+interface VirtualLabProps {
+  onOpenNotes?: () => void;
+}
+
+export const VirtualLab: React.FC<VirtualLabProps> = ({ onOpenNotes }) => {
   const [selectedSlideId, setSelectedSlideId] = useState<string>('cebolla');
   const [magnification, setMagnification] = useState<'40x' | '100x' | '400x'>('100x');
   const [focusPosition, setFocusPosition] = useState<number>(52);
@@ -41,19 +45,19 @@ export const VirtualLab: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Encabezado y etiqueta obligatoria */}
-      <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-4 shadow-2xs">
+      <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-4 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
           <div>
-            <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+            <div className="text-xs font-semibold text-[#16A6A0] uppercase tracking-wider mb-1">
               Sección 5 · Práctica Digital
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+            <h2 className="text-2xl font-bold text-[#173B70] tracking-tight">
               Laboratorio Virtual de Microscopía
             </h2>
           </div>
 
           {/* Etiqueta obligatoria requerida por el pliego */}
-          <div className="text-xs font-semibold px-3 py-1 bg-slate-100 border border-slate-300 text-slate-800 rounded self-start sm:self-auto">
+          <div className="text-xs font-medium px-3 py-1 bg-slate-100 border border-slate-200 text-slate-700 rounded-md self-start sm:self-auto">
             Simulación educativa: no sustituye la observación real
           </div>
         </div>
@@ -67,10 +71,10 @@ export const VirtualLab: React.FC = () => {
       {/* ÁREA DE OBSERVACIÓN: VISOR OCULAR Y CONSOLA MECÁNICA */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Columna Izquierda: Visor Ocular Circular */}
-        <div className="lg:col-span-7 bg-slate-900 rounded-xl p-6 shadow-md border border-slate-800 flex flex-col items-center justify-center space-y-4">
+        <div className="lg:col-span-7 bg-slate-950 rounded-2xl p-6 shadow-md border border-slate-800 flex flex-col items-center justify-center space-y-4">
           <div className="flex items-center justify-between w-full max-w-sm text-xs text-slate-300 font-mono px-2">
             <span>Ocular: 10x</span>
-            <span className="text-sky-300 font-bold">Aumento Total: {magnification}</span>
+            <span className="text-[#22d3ee] font-bold">Aumento Total: {magnification}</span>
           </div>
 
           {/* Círculo óptico */}
@@ -96,9 +100,9 @@ export const VirtualLab: React.FC = () => {
 
         {/* Columna Derecha: Consola de Mandos de la Platina */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-2xs space-y-5">
+          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs space-y-5">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide">
+              <h3 className="text-xs font-bold text-[#173B70] uppercase tracking-wider">
                 Mandos del Microscopio
               </h3>
               <button
@@ -113,7 +117,7 @@ export const VirtualLab: React.FC = () => {
 
             {/* 1. Selector de preparaciones */}
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-700 block">
+              <label className="text-xs font-semibold text-slate-800 block">
                 1. Muestra en platina:
               </label>
               <div className="space-y-1">
@@ -124,13 +128,13 @@ export const VirtualLab: React.FC = () => {
                       setSelectedSlideId(slide.id);
                       setFocusPosition(50);
                     }}
-                    className={`w-full text-left p-2 rounded border text-xs transition-colors flex items-center justify-between ${
+                    className={`w-full text-left p-2.5 rounded-lg border text-xs transition-colors flex items-center justify-between cursor-pointer ${
                       selectedSlideId === slide.id
-                        ? 'bg-slate-900 border-slate-900 text-white font-semibold'
-                        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                        ? 'bg-[#173B70] border-[#173B70] text-white font-semibold shadow-xs'
+                        : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    <span className="truncate pr-2">{slide.name}</span>
+                    <span className="truncate pr-2 font-medium">{slide.name}</span>
                     <span className="text-[10px] font-mono opacity-80 uppercase shrink-0">
                       {slide.category}
                     </span>
@@ -142,20 +146,20 @@ export const VirtualLab: React.FC = () => {
             {/* 2. Selector de aumento */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between text-xs">
-                <label className="font-semibold text-slate-700">
+                <label className="font-semibold text-slate-800">
                   2. Objetivo en revólver:
                 </label>
-                <span className="font-mono text-slate-500">{magnification} total</span>
+                <span className="font-mono text-[#16A6A0] font-bold">{magnification} total</span>
               </div>
               <div className="grid grid-cols-3 gap-2">
                 {(['40x', '100x', '400x'] as const).map((mag) => (
                   <button
                     key={mag}
                     onClick={() => setMagnification(mag)}
-                    className={`py-1.5 text-xs font-semibold rounded border transition-colors ${
+                    className={`py-2 text-xs font-semibold rounded-lg border transition-colors cursor-pointer ${
                       magnification === mag
-                        ? 'bg-slate-800 border-slate-800 text-white'
-                        : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                        ? 'bg-[#173B70] border-[#173B70] text-white shadow-xs'
+                        : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'
                     }`}
                   >
                     {mag}
@@ -168,8 +172,8 @@ export const VirtualLab: React.FC = () => {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between text-xs">
                 <label className="font-semibold text-slate-700 flex items-center gap-1.5">
-                  <Sliders className="w-3.5 h-3.5 text-slate-600" />
-                  <span>3. Tornillo Micrométrico (Enfoque fino):</span>
+                  <Sliders className="w-3.5 h-3.5 text-[#16A6A0]" />
+                  <span>3. Tornillo Micrométrico:</span>
                 </label>
                 <span className="font-mono text-slate-500">{focusPosition}%</span>
               </div>
@@ -179,11 +183,11 @@ export const VirtualLab: React.FC = () => {
                 max="90"
                 value={focusPosition}
                 onChange={(e) => setFocusPosition(Number(e.target.value))}
-                className="w-full accent-slate-800 cursor-pointer"
+                className="w-full accent-[#16A6A0] cursor-pointer"
               />
               <div className="flex justify-between text-[10px] text-slate-400">
                 <span>Distal</span>
-                <span className="font-medium text-slate-600">Punto focal ≈ 52%</span>
+                <span className="font-medium text-[#16A6A0]">Punto focal ≈ 52%</span>
                 <span>Proximal</span>
               </div>
             </div>
@@ -192,7 +196,7 @@ export const VirtualLab: React.FC = () => {
             <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-4">
               <button
                 onClick={() => setShowLabels(!showLabels)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded border transition-colors flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 text-xs font-semibold rounded-md border transition-colors flex items-center gap-1.5 ${
                   showLabels
                     ? 'bg-slate-100 border-slate-300 text-slate-800'
                     : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'
@@ -203,14 +207,14 @@ export const VirtualLab: React.FC = () => {
               </button>
 
               <div className="flex items-center gap-2 text-xs text-slate-500">
-                <Sun className="w-3.5 h-3.5 text-slate-600" />
+                <Sun className="w-3.5 h-3.5 text-amber-500" />
                 <input
                   type="range"
                   min="40"
                   max="100"
                   value={lightIntensity}
                   onChange={(e) => setLightIntensity(Number(e.target.value))}
-                  className="w-20 accent-slate-700"
+                  className="w-20 accent-[#173B70]"
                   title="Apertura diafragma / Luz"
                 />
               </div>
@@ -218,8 +222,8 @@ export const VirtualLab: React.FC = () => {
           </div>
 
           {/* Detalles identificables en este aumento */}
-          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-2xs space-y-2 text-xs">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
+          <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs space-y-2 text-xs">
+            <span className="text-[11px] font-bold text-[#16A6A0] uppercase tracking-wider block">
               Detalles observables a {magnification}
             </span>
             <h4 className="text-sm font-bold text-slate-900">
@@ -236,24 +240,37 @@ export const VirtualLab: React.FC = () => {
               <ul className="space-y-1">
                 {magDetails.visibleStructures.map((s, idx) => (
                   <li key={idx} className="text-slate-600 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#16A6A0]" />
                     <span>{s}</span>
                   </li>
                 ))}
               </ul>
             </div>
+
+            {onOpenNotes && (
+              <div className="pt-2 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={onOpenNotes}
+                  className="w-full py-2 px-3 text-xs font-semibold text-[#173B70] bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
+                >
+                  <FileEdit className="w-3.5 h-3.5 text-[#16A6A0]" />
+                  <span>Anotar esta observación en mi cuaderno</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
       {/* ACTIVIDAD: MISIÓN MICROSCÓPICA */}
-      <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-4 shadow-2xs">
+      <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-4 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
           <div>
-            <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+            <div className="text-xs font-semibold text-[#16A6A0] uppercase tracking-wider mb-1">
               Actividad Práctica Guiada
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+            <h3 className="text-lg sm:text-xl font-bold text-[#173B70]">
               Misión Microscópica de Análisis Comparativo
             </h3>
             <p className="text-xs text-slate-500">
@@ -263,7 +280,7 @@ export const VirtualLab: React.FC = () => {
 
           <button
             onClick={() => setMissionActive(!missionActive)}
-            className="px-3.5 py-1.5 text-xs font-semibold bg-slate-900 text-white rounded hover:bg-slate-800 transition-colors self-start sm:self-auto cursor-pointer"
+            className="px-3.5 py-1.5 text-xs font-semibold bg-[#173B70] text-white rounded-md hover:bg-[#122e56] transition-colors self-start sm:self-auto cursor-pointer shadow-xs"
           >
             {missionActive ? 'Ocultar preguntas' : 'Abrir preguntas de análisis'}
           </button>
@@ -279,7 +296,7 @@ export const VirtualLab: React.FC = () => {
                 <select
                   value={missionSample1}
                   onChange={(e) => setMissionSample1(e.target.value)}
-                  className="w-full p-2 rounded border border-slate-200 bg-white text-slate-800 text-xs"
+                  className="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-slate-800 text-xs"
                 >
                   <option value="cebolla">Epidermis de cebolla (Allium cepa)</option>
                   <option value="hoja_verde">Tejido foliar con cloroplastos</option>
@@ -293,7 +310,7 @@ export const VirtualLab: React.FC = () => {
                 <select
                   value={missionSample2}
                   onChange={(e) => setMissionSample2(e.target.value)}
-                  className="w-full p-2 rounded border border-slate-200 bg-white text-slate-800 text-xs"
+                  className="w-full p-2.5 rounded-lg border border-slate-200 bg-white text-slate-800 text-xs"
                 >
                   <option value="mucosa">Mucosa bucal humana</option>
                   <option value="muscular">Tejido muscular estriado</option>
@@ -313,7 +330,7 @@ export const VirtualLab: React.FC = () => {
                   value={missionAnswer1}
                   onChange={(e) => setMissionAnswer1(e.target.value)}
                   placeholder="Redacta tu respuesta considerando la presencia o ausencia de pared celular..."
-                  className="w-full p-2.5 rounded border border-slate-200 bg-slate-50 text-xs outline-none focus:bg-white focus:border-slate-400"
+                  className="w-full p-2.5 rounded-lg border border-slate-200 bg-slate-50 text-xs outline-none focus:bg-white focus:border-[#16A6A0]"
                 />
               </div>
 
@@ -327,7 +344,7 @@ export const VirtualLab: React.FC = () => {
                   value={missionAnswer2}
                   onChange={(e) => setMissionAnswer2(e.target.value)}
                   placeholder="Indica el nombre de la estructura y cómo se visualiza..."
-                  className="w-full p-2.5 rounded border border-slate-200 bg-slate-50 text-xs outline-none focus:bg-white focus:border-slate-400"
+                  className="w-full p-2.5 rounded-lg border border-slate-200 bg-slate-50 text-xs outline-none focus:bg-white focus:border-[#16A6A0]"
                 />
               </div>
 
@@ -341,7 +358,7 @@ export const VirtualLab: React.FC = () => {
                   value={missionAnswer3}
                   onChange={(e) => setMissionAnswer3(e.target.value)}
                   placeholder="Explica la relación entre poder de resolución, área visual y aumento..."
-                  className="w-full p-2.5 rounded border border-slate-200 bg-slate-50 text-xs outline-none focus:bg-white focus:border-slate-400"
+                  className="w-full p-2.5 rounded-lg border border-slate-200 bg-slate-50 text-xs outline-none focus:bg-white focus:border-[#16A6A0]"
                 />
               </div>
             </div>
@@ -349,7 +366,7 @@ export const VirtualLab: React.FC = () => {
             <div className="pt-2">
               <button
                 type="submit"
-                className="px-4 py-2 bg-slate-900 text-white rounded text-xs font-semibold hover:bg-slate-800 transition-colors flex items-center gap-1.5 cursor-pointer"
+                className="px-5 py-2.5 bg-[#173B70] text-white rounded-lg text-xs font-semibold hover:bg-[#122e56] transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
               >
                 <span>Registrar conclusiones</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -357,8 +374,8 @@ export const VirtualLab: React.FC = () => {
             </div>
 
             {missionSubmitted && (
-              <div className="p-4 rounded-lg bg-slate-50 border border-slate-300 text-slate-800 space-y-1">
-                <strong className="block font-semibold">
+              <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-slate-800 space-y-1">
+                <strong className="block font-semibold text-emerald-900">
                   ✓ Respuestas registradas en el cuaderno digital.
                 </strong>
                 <p className="text-xs text-slate-600">

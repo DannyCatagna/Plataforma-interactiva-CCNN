@@ -5,9 +5,10 @@ import { Printer, FileDown, Check, X, RotateCcw, FileText, CheckCircle } from 'l
 
 interface WorksheetSectionProps {
   onQuizComplete?: (score: number) => void;
+  onOpenNotes?: () => void;
 }
 
-export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComplete }) => {
+export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComplete, onOpenNotes }) => {
   const [activeView, setActiveView] = useState<'worksheet' | 'quiz'>('worksheet');
   const [selectedAnswers, setSelectedAnswers] = useState<{ [qId: number]: number }>({});
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -45,49 +46,60 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
   return (
     <div className="space-y-8">
       {/* Encabezado y Acciones de Impresión / Descarga */}
-      <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-4 shadow-2xs no-print">
+      <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-4 shadow-xs no-print">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-4">
           <div>
-            <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+            <div className="text-xs font-semibold text-[#16A6A0] uppercase tracking-wider mb-1">
               Sección 6 · Documentación y Evaluación
             </div>
-            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
-              Hoja de Trabajo A4 y Evaluación Formativa
+            <h2 className="text-2xl font-bold text-[#173B70] tracking-tight">
+              Hoja de Trabajo A4, Apuntes y Evaluación Formativa
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
-              Descarga la guía física oficial lista para imprimir en papel A4 o resuelve el cuestionario
-              digital de diez preguntas para evaluar tus conocimientos sobre el microscopio, células y tejidos.
+              Descarga la guía física oficial lista para imprimir en papel A4, registra tus apuntes
+              de laboratorio digitalmente o resuelve el cuestionario de 10 preguntas.
             </p>
           </div>
 
-          {/* Botones obligatorios de impresión y descarga */}
+          {/* Botones de acción */}
           <div className="flex flex-wrap items-center gap-2 shrink-0">
+            {onOpenNotes && (
+              <button
+                onClick={onOpenNotes}
+                className="px-3.5 py-2 text-xs sm:text-sm font-semibold text-[#173B70] bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                title="Tomar y guardar apuntes de laboratorio en la web"
+              >
+                <FileText className="w-4 h-4 text-[#16A6A0]" />
+                <span>Mis Apuntes Digitales</span>
+              </button>
+            )}
+
             <button
               onClick={handlePrint}
-              className="px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded transition-colors flex items-center gap-2 cursor-pointer shadow-2xs"
+              className="px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-[#173B70] hover:bg-[#122e56] rounded-lg transition-colors flex items-center gap-2 cursor-pointer shadow-xs"
             >
-              <Printer className="w-4 h-4 text-slate-300" />
-              <span>Imprimir hoja de trabajo</span>
+              <Printer className="w-4 h-4" />
+              <span>Imprimir guía A4</span>
             </button>
 
             <button
               onClick={handlePrint}
-              className="px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded transition-colors flex items-center gap-2 cursor-pointer"
+              className="px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg transition-colors flex items-center gap-2 cursor-pointer shadow-2xs"
               title="Guardar como PDF en el diálogo de impresión"
             >
-              <FileDown className="w-4 h-4 text-slate-600" />
-              <span>Descargar hoja en PDF</span>
+              <FileDown className="w-4 h-4 text-[#16A6A0]" />
+              <span>Descargar en PDF</span>
             </button>
           </div>
         </div>
 
         {/* Pestañas de modo */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => setActiveView('worksheet')}
-            className={`px-3.5 py-1.5 text-xs font-semibold rounded transition-colors flex items-center gap-1.5 ${
+            className={`px-3.5 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${
               activeView === 'worksheet'
-                ? 'bg-slate-900 text-white'
+                ? 'bg-[#173B70] text-white shadow-xs'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
@@ -97,9 +109,9 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
 
           <button
             onClick={() => setActiveView('quiz')}
-            className={`px-3.5 py-1.5 text-xs font-semibold rounded transition-colors flex items-center gap-1.5 ${
+            className={`px-3.5 py-1.5 text-xs font-semibold rounded-md transition-colors flex items-center gap-1.5 cursor-pointer ${
               activeView === 'quiz'
-                ? 'bg-slate-900 text-white'
+                ? 'bg-[#173B70] text-white shadow-xs'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
@@ -111,7 +123,7 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
       {/* VISTA 1: HOJA DE TRABAJO IMPRIMIBLE OFICIAL */}
       {activeView === 'worksheet' && (
         <section className="space-y-4">
-          <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs text-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3 no-print">
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3 no-print">
             <p>
               <strong>Indicaciones para el profesorado y alumnado:</strong> El siguiente documento está preparado
               para imprimirse en formato <strong>A4 vertical (210 × 297 mm)</strong> sin elementos de la interfaz web,
@@ -119,7 +131,7 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
             </p>
             <button
               onClick={handlePrint}
-              className="px-3.5 py-1.5 bg-slate-900 text-white text-xs font-semibold rounded hover:bg-slate-800 transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 bg-[#173B70] text-white text-xs font-semibold rounded-lg hover:bg-[#122e56] transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer shadow-xs"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Imprimir ahora</span>
@@ -127,7 +139,7 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
           </div>
 
           {/* Contenedor del documento A4 con borde tenue de papel */}
-          <div className="bg-slate-100 p-2 sm:p-8 rounded-xl border border-slate-300 overflow-x-auto shadow-inner">
+          <div className="bg-slate-100 p-2 sm:p-8 rounded-2xl border border-slate-300 overflow-x-auto shadow-inner">
             <div className="bg-white mx-auto shadow-sm print:shadow-none">
               <PrintableWorksheet />
             </div>
@@ -137,13 +149,13 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
 
       {/* VISTA 2: CUESTIONARIO DIGITAL DE 10 PREGUNTAS */}
       {activeView === 'quiz' && (
-        <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-6 shadow-2xs no-print">
+        <section className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8 space-y-6 shadow-xs no-print">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
             <div>
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+              <span className="text-xs font-semibold text-[#16A6A0] uppercase tracking-wider">
                 Evaluación Digital de Contenidos
               </span>
-              <h3 className="text-xl font-bold text-slate-900">
+              <h3 className="text-xl font-bold text-[#173B70]">
                 Cuestionario de Ciencias Naturales
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
@@ -152,9 +164,9 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
             </div>
 
             {isSubmitted && (
-              <div className="p-3 bg-slate-50 border border-slate-300 rounded text-center">
+              <div className="p-3 bg-slate-50 border border-slate-300 rounded-lg text-center">
                 <span className="text-[11px] text-slate-500 font-semibold block uppercase">Calificación:</span>
-                <span className="text-2xl font-bold text-slate-900 font-mono">
+                <span className="text-2xl font-bold text-[#173B70] font-mono">
                   {score} / 10
                 </span>
               </div>
@@ -170,17 +182,17 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
               return (
                 <div
                   key={q.id}
-                  className={`p-4 rounded-lg border text-xs sm:text-sm transition-colors ${
+                  className={`p-4 rounded-xl border text-xs sm:text-sm transition-colors ${
                     isSubmitted
                       ? isCorrect
-                        ? 'bg-emerald-50/40 border-emerald-300'
-                        : 'bg-rose-50/30 border-rose-300'
-                      : 'bg-slate-50/50 border-slate-200'
+                        ? 'bg-emerald-50/50 border-emerald-300'
+                        : 'bg-rose-50/40 border-rose-300'
+                      : 'bg-slate-50/40 border-slate-200'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3 mb-2.5">
                     <h4 className="font-semibold text-slate-900 leading-snug">
-                      <span className="font-mono text-slate-500 mr-1.5">{qIndex + 1}.</span>
+                      <span className="font-mono text-[#16A6A0] mr-1.5">{qIndex + 1}.</span>
                       {q.question}
                     </h4>
 
@@ -206,7 +218,7 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
                           key={optIdx}
                           disabled={isSubmitted}
                           onClick={() => handleSelectOption(q.id, optIdx)}
-                          className={`w-full text-left p-2.5 rounded border text-xs font-medium transition-colors flex items-center justify-between ${
+                          className={`w-full text-left p-2.5 rounded-lg border text-xs font-medium transition-colors flex items-center justify-between ${
                             isSubmitted
                               ? isOptionCorrect
                                 ? 'bg-emerald-50 border-emerald-400 text-emerald-950 font-semibold'
@@ -214,7 +226,7 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
                                 ? 'bg-rose-50 border-rose-300 text-rose-950'
                                 : 'bg-white border-slate-200 text-slate-400 opacity-60'
                               : isOptionSelected
-                              ? 'bg-slate-900 border-slate-900 text-white font-semibold'
+                              ? 'bg-[#173B70] border-[#173B70] text-white font-semibold shadow-xs'
                               : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'
                           }`}
                         >
@@ -252,7 +264,7 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
                 <button
                   disabled={answeredCount < QUIZ_QUESTIONS.length}
                   onClick={handleCheckQuiz}
-                  className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 disabled:opacity-30 disabled:pointer-events-none text-white text-xs sm:text-sm font-semibold rounded transition-colors cursor-pointer"
+                  className="px-6 py-2.5 bg-[#173B70] hover:bg-[#122e56] disabled:opacity-30 disabled:pointer-events-none text-white text-xs sm:text-sm font-semibold rounded-lg transition-colors cursor-pointer shadow-xs"
                 >
                   {answeredCount < QUIZ_QUESTIONS.length
                     ? `Completa las ${QUIZ_QUESTIONS.length - answeredCount} pendientes`
@@ -261,7 +273,7 @@ export const WorksheetSection: React.FC<WorksheetSectionProps> = ({ onQuizComple
               ) : (
                 <button
                   onClick={handleResetQuiz}
-                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded transition-colors flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2 bg-[#173B70] hover:bg-[#122e56] text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Intentar de nuevo</span>
